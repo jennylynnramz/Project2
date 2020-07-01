@@ -11,19 +11,19 @@ d3.json(queryUrl, function(data) {
 function createFeatures(SFevictionData) {
 
   // Define a function we want to run once for each feature in the features array
-  // Give each feature a popup describing the place and time of the earthquake
+  // Give each feature a popup describing the place and time of the eviction
   function onEachFeature(feature, layer) {
-    layer.bindPopup("<h3>" + feature.properties.evictions_id +
-      "</h3><hr><p>" + feature.properties.neighborhood + "</p>");
+    layer.bindPopup("<h3> Eviction ID: " + feature.properties.eviction_id +
+      "</h3><hr><p> SF Neighborhood: " + feature.properties.neighborhood + "</p>" + "<hr><p>Date of Notice: " + new Date(feature.properties.file_date) + "</p>");
   }
 
-  // Create a GeoJSON layer containing the features array on the earthquakeData object
+  // Create a GeoJSON layer containing the features array on the SF evictions object
   // Run the onEachFeature function once for each piece of data in the array
   var evictions = L.geoJSON(SFevictionData, {
     onEachFeature: onEachFeature
   });
 
-  // Sending our earthquakes layer to the createMap function
+  // Sending our evictions layer to the createMap function
   createMap(evictions);
 }
 
@@ -57,12 +57,12 @@ function createMap(evictions) {
     Evictions: evictions
   };
 
-  // Create our map, giving it the streetmap and earthquakes layers to display on load
+  // Create our map, giving it the streetmap and eviction layers to display on load
   var myMap = L.map("map", {
     center: [
-      37.09, -95.71
+        37.7749, -122.4194
     ],
-    zoom: 5,
+    zoom: 13,
     layers: [streetmap, evictions]
   });
 
