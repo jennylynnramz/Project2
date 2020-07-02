@@ -62,9 +62,9 @@ function createMap(evictions) {
   // Create our map, giving it the streetmap and eviction layers to display on load
   var myMap = L.map("map", {
     center: [
-        37.7749, -122.4194
+        37.7449, -122.4794
     ],
-    zoom: 13,
+    zoom: 12,
     layers: [streetmap, evictions]
   });
 
@@ -123,110 +123,107 @@ d3.json(queryUrl, function(legendData) {
     unapproved_subtenant: 0
   };
 
-  var evictionRational;
-  
+
+
   for (var i = 0; i < propertyData.length; i++){
-    // console.log(propertyData[i])
-    // console.log(propertyData[i].properties.breach)
-    // console.log(typeof(propertyData[i].properties.breach))
+
     if (propertyData[i].properties.breach === true) {
       evictionCount.breach++;
-      console.log("Eviction for breach");
+      // console.log("Eviction for breach");
     }
 
     else if (propertyData[i].properties.capital_improvement === true) {
       evictionCount.capital_improvement++;
-      console.log("Eviction for capital_improvement");
+      // console.log("Eviction for capital_improvement");
     }
 
     else if (propertyData[i].properties.condo_conversion === true) {
       evictionCount.condo_conversion++;
-      console.log("Eviction for condo_conversion");
+      // console.log("Eviction for condo_conversion");
     }
 
     else if (propertyData[i].properties.demolition === true) {
       evictionCount.demolition++;
-      console.log("Eviction for demolition");
+      // console.log("Eviction for demolition");
     }
 
     else if (propertyData[i].properties.development === true) {
       evictionCount.development++;
-      console.log("Eviction for development");
+      // console.log("Eviction for development");
     }
 
     else if (propertyData[i].properties.ellis_act_withdrawal === true) {
       evictionCount.ellis_act_withdrawal++;
-      console.log("Eviction for ellis_act_withdrawal");
+      // console.log("Eviction for ellis_act_withdrawal");
     }
 
     else if (propertyData[i].properties.failure_to_sign_renewal === true) {
       evictionCount.failure_to_sign_renewal++;
-      console.log("Eviction for failure_to_sign_renewal");
+      // console.log("Eviction for failure_to_sign_renewal");
     }
 
     else if (propertyData[i].properties.good_samaritan_ends === true) {
       evictionCount.good_samaritan_ends++;
-      console.log("Eviction for good_samaritan_ends");
+      // console.log("Eviction for good_samaritan_ends");
     }
 
     else if (propertyData[i].properties.illegal_use === true) {
       evictionCount.illegal_use++;
-      console.log("Eviction for illegal_use");
+      // console.log("Eviction for illegal_use");
     }
 
     else if (propertyData[i].properties.late_payments === true) {
       evictionCount.late_payments++;
-      console.log("Eviction for late_payments");
+      // console.log("Eviction for late_payments");
     }
 
     else if (propertyData[i].properties.lead_remediation === true) {
       evictionCount.lead_remediation++;
-      console.log("Eviction for lead_remediation");
+      // console.log("Eviction for lead_remediation");
     }
 
     else if (propertyData[i].properties.non_payment === true) {
       evictionCount.non_payment++;
-      console.log("Eviction for non_payment");
+      // console.log("Eviction for non_payment");
     }
 
     else if (propertyData[i].properties.nuisance === true) {
       evictionCount.nuisance++;
-      console.log("Eviction for nuisance");
+      // console.log("Eviction for nuisance");
     }
 
     else if (propertyData[i].properties.other_cause === true) {
       evictionCount.other_cause++;
-      console.log("Eviction for other_cause");
+      // console.log("Eviction for other_cause");
     }
 
     else if (propertyData[i].properties.owner_move_in === true) {
       evictionCount.owner_move_in++;
-      console.log("Eviction for owner_move_in");
+      // console.log("Eviction for owner_move_in");
     }
 
     else if (propertyData[i].properties.roommate_same_unit === true) {
       evictionCount.roommate_same_unit++;
-      console.log("Eviction for roommate_same_unit");
+      // console.log("Eviction for roommate_same_unit");
     }
 
     else if (propertyData[i].properties.substantial_rehab === true) {
       evictionCount.substantial_rehab++;
-      console.log("Eviction for substantial_rehab");
+      // console.log("Eviction for substantial_rehab");
     }
 
 //
     else {
       evictionCount.unapproved_subtenant++;
-      console.log("Eviction for unapproved_subtenant");
+      // console.log("Eviction for unapproved_subtenant");
 
     }
 
   }
 
-  console.log(evictionCount)
+  // console.log(evictionCount)
 // Call the updateLegend function, which will... update the legend
   updateLegend(evictionCount);
-
 
 });
 
@@ -252,7 +249,7 @@ function updateLegend(evictionCount) {
  "<p>Owner Move In: " + evictionCount.owner_move_in +"</p>",
  "<p>Roommate Same Unit: " + evictionCount.roommate_same_unit +"</p>",
  "<p>Substantial Rehab: " + evictionCount.substantial_rehab +"</p>",
- "<p>Unapproved Subtenant: " + evictionCount.unapproved_subtenant +"</p>",
+ "<p>Unapproved Subtenant: " + evictionCount.unapproved_subtenant +"</p>"
     
   ].join("");
 }
