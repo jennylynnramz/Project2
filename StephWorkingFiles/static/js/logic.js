@@ -26,7 +26,7 @@ d3.json(link, function(data) {
       return {
         color: "black",
         fillColor: "gray",
-        fillOpacity: 0.5,
+        fillOpacity: 0,
         weight: 1.5
       };
     },
@@ -45,7 +45,7 @@ d3.json(link, function(data) {
         mouseout: function(event) {
           layer = event.target;
           layer.setStyle({
-            fillOpacity: 0.5
+            fillOpacity: 0
           });
         },
         // Enlarge section when clicked
