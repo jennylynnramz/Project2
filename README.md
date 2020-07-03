@@ -2,7 +2,7 @@
 
 Link to Project Propsal: https://docs.google.com/document/d/1-kB-BiIe00_xW5drmvP5S7wmDXjEYdadOWv_2tlLSjQ/edit?usp=sharing
 Link to Task List: https://docs.google.com/spreadsheets/d/1tWT5DNjhhMBKpASTZNPqrtV48lcKbEC7rVkbLbyhejM/edit?usp=sharing
-Link to Presentation (to come...)
+Link to Presentation: https://docs.google.com/presentation/d/1MCm9fCbFyJ4OXFqVGj42MSlzBq66Ji8bFfgVXxZJ-gU/edit?usp=sharing
 Link to Live App (to come...)
 
 1. Your visualization must include a
