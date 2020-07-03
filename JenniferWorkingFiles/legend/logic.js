@@ -93,6 +93,7 @@ info.onAdd = function() {
 // Add the info legend to the map
 info.addTo(myMap);
 
+
 //where the count begins
 d3.json(queryUrl, function(legendData) {
   console.log(legendData);
@@ -123,107 +124,106 @@ d3.json(queryUrl, function(legendData) {
     unapproved_subtenant: 0
   };
 
-
-
   for (var i = 0; i < propertyData.length; i++){
 
     if (propertyData[i].properties.breach === true) {
       evictionCount.breach++;
       // console.log("Eviction for breach");
     }
-
     else if (propertyData[i].properties.capital_improvement === true) {
       evictionCount.capital_improvement++;
       // console.log("Eviction for capital_improvement");
     }
-
     else if (propertyData[i].properties.condo_conversion === true) {
       evictionCount.condo_conversion++;
       // console.log("Eviction for condo_conversion");
     }
-
     else if (propertyData[i].properties.demolition === true) {
       evictionCount.demolition++;
       // console.log("Eviction for demolition");
     }
-
     else if (propertyData[i].properties.development === true) {
       evictionCount.development++;
       // console.log("Eviction for development");
     }
-
     else if (propertyData[i].properties.ellis_act_withdrawal === true) {
       evictionCount.ellis_act_withdrawal++;
       // console.log("Eviction for ellis_act_withdrawal");
     }
-
     else if (propertyData[i].properties.failure_to_sign_renewal === true) {
       evictionCount.failure_to_sign_renewal++;
       // console.log("Eviction for failure_to_sign_renewal");
     }
-
     else if (propertyData[i].properties.good_samaritan_ends === true) {
       evictionCount.good_samaritan_ends++;
       // console.log("Eviction for good_samaritan_ends");
     }
-
     else if (propertyData[i].properties.illegal_use === true) {
       evictionCount.illegal_use++;
       // console.log("Eviction for illegal_use");
     }
-
     else if (propertyData[i].properties.late_payments === true) {
       evictionCount.late_payments++;
       // console.log("Eviction for late_payments");
     }
-
     else if (propertyData[i].properties.lead_remediation === true) {
       evictionCount.lead_remediation++;
       // console.log("Eviction for lead_remediation");
     }
-
     else if (propertyData[i].properties.non_payment === true) {
       evictionCount.non_payment++;
       // console.log("Eviction for non_payment");
     }
-
     else if (propertyData[i].properties.nuisance === true) {
       evictionCount.nuisance++;
       // console.log("Eviction for nuisance");
     }
-
     else if (propertyData[i].properties.other_cause === true) {
       evictionCount.other_cause++;
       // console.log("Eviction for other_cause");
     }
-
     else if (propertyData[i].properties.owner_move_in === true) {
       evictionCount.owner_move_in++;
       // console.log("Eviction for owner_move_in");
     }
-
     else if (propertyData[i].properties.roommate_same_unit === true) {
       evictionCount.roommate_same_unit++;
       // console.log("Eviction for roommate_same_unit");
     }
-
     else if (propertyData[i].properties.substantial_rehab === true) {
       evictionCount.substantial_rehab++;
       // console.log("Eviction for substantial_rehab");
     }
-
-//
     else {
       evictionCount.unapproved_subtenant++;
       // console.log("Eviction for unapproved_subtenant");
-
     }
+  } //end count for loop
 
-  }
-
-  // console.log(evictionCount)
 // Call the updateLegend function, which will... update the legend
   updateLegend(evictionCount);
+
+  var neighborhoodList = [];
+
+  for (var i = 0; i < propertyData.length; i++){
+    console.log(propertyData[i].properties.neighborhood)
+
+    var potato = propertyData[i].properties.neighborhood;
+
+    // neighborhoodList.map(hood => hood.neighborhood)
+    //   .filter((value, index, self) => self.indexOf(value) === index)
+
+    // if ((potato in neighborhoodList) === false) {
+      neighborhoodList.push(potato)
+    // }
+
+  
+  } //end neighborhood for loop
+  // console.log(neighborhoodList)
+
+  var distinctList = [...new Set(neighborhoodList)]
+
+  console.log(distinctList)
 
 });
 
