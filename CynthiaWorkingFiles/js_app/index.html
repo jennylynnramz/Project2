@@ -31,28 +31,77 @@
   <!-- Jumbotron/Intro -->
   <div class="jumbotron">
     <img src="images/chris-lawton-tX6BrZCFYOQ-unsplash.jpg" class="img-fluid" alt="Responsive image">
-    <h1 class="display-4">Looking at Evictions in San Francisco</h1>
-    <p class="lead">This project took the dataset from Data SF to study the relationship between evictions and SF neighborhhods. Additionally, we took data from Redfin's webstie to look at the relationship, if any, in home prices.</p>
+    <h2 class="display-4">Looking at Evictions in San Francisco by Neighborhood</h2>
+    <p class="lead">This group project took the dataset from Data SF to study the relationship between evictions and SF neighborhhods. Additionally, we took data from Redfin's website to look at the relationship, if any, in home prices.</p>
     <hr class="my-4">
-    <p>This website will share with you our learnings and any relevant data visualizations.</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Scroll Down</a>
+    <!-- <p>This website will share with you our learnings and any relevant data visualizations.</p> -->
+    <p>Data sets used in this analysis:</p>
+    <ul>
+      <li><a href="https://data.sfgov.org/Housing-and-Buildings/Eviction-Notices/5cei-gny5">San Francisco Evictions</a></li>
+      <li><a href="https://www.redfin.com/">San Francisco Real Estate Prices Scraped from Redfin</a></li>
+    </ul>
+    
+    <p>Explorations: The team wanted to dive into the evictions data to see if there were any geogrpahical patterns...some of the questions explored were: </p>
+    <ul>
+      <li>Are there SF neighborhhods that have higher clusters of evictions?</li>
+      <li>What is the real estate "profile" of those neighborhhods? </li>
+      <li>What is the most common type of eviction?</li>
+      <li>Is there a relationship to the type of eviction with Neighborhood?</li>
+      
+    </ul>
+    <!-- <a class="btn btn-primary btn-lg" href="#" role="button">Scroll Down</a> -->
   </div>
   
-  <!-- The containers where we will inject our map -->
-  <div class="container-fluid">
-    
-  </div>
-<!-- Container 1 -->
+
+  <!-- Container 1 -->
   <div class="container-fluid">
     <div class="row">
-      <div id="map" class="col-sm-12" >
+      <div class="col-sm">
+        <h3>SF Eviction Summary Statistics</h3>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm">
+        <img src="images/morning-brew-MkIZ456qwPI-unsplash.jpg" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="col-sm"></div>
+    </div>
   </div>
+<hr>
   <!-- Container 2 -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
+        <h3>SF Real Estate Summary Statistics</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm">
+        <img src="images/bill-mackie-iF6nfBH9vNA-unsplash.jpg" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="col-sm"></div>
+    </div>
+  </div>
+  <hr>
+  <!-- Containter Intro for MAP -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
+        <h3>Interactive Map of Evictions in San Francisco</h3>
+      </div>
+    </div>
+  </div>
+<!-- MAP Container -->
+  <div id="map" class="col-sm-12" ></div>
+    
+  
+<hr>
+  <!-- Container Template (do not code) -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
         One of three columns
       </div>
       <div class="col-sm">
@@ -62,10 +111,6 @@
         One of three columns
       </div>
     </div>
-  </div>
-
-  <!-- Container 3 -->
-  <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
         One of three columns
@@ -79,8 +124,17 @@
     </div>
   </div>
   
-  
-
+  <!-- FOOTER -->
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm">
+          <h5>Put together with the brains of Cynthia, Humberto, Jennifer, and Stephanie in July of 2020.</h5>
+        </div>
+      </div>
+      
+    </div>
+  </footer>
   <!-- Scripts -->
   <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
   integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
