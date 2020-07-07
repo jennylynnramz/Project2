@@ -2,123 +2,58 @@ var queryUrl = "https://data.sfgov.org/resource/5cei-gny5.geojson";
 
 // Perform a GET request to the query URL
 d3.json(queryUrl, function(legendData) {
-    console.log(legendData);
-  
-    var propertyData = legendData.features
-    // Once we get a response, send the data.features object to the createFeatures function
-
-    var neighborhoodList = [];
-   
-    
-    for (var i = 0; i < propertyData.length; i++){
-        // console.log(propertyData[i].properties.neighborhood)
-    
-        var neighborhood = propertyData[i].properties.neighborhood;
-    
-          neighborhoodList.push(neighborhood)
-    
-    } //end neighborhood for loop
-      // console.log(neighborhoodList)
-    
-    var distinctList = [...new Set(neighborhoodList)]
-    
-    // console.log(distinctList)
-
-    var evictionNeighborhood = [];
-    
-
-    for (var i = 0; i < propertyData.length; i++){
-        for (var i = 0; i < propertyData.length; i++){
-
-            if (propertyData[i].properties.breach === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: breach`)
-              // console.log("Eviction for breach");
-            }
-            else if (propertyData[i].properties.capital_improvement === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: capital_improvement`) 
-             // console.log("Eviction for capital_improvement");
-            }
-            else if (propertyData[i].properties.condo_conversion === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: condo_conversion`)
-              // console.log("Eviction for condo_conversion");
-            }
-            else if (propertyData[i].properties.demolition === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: demolition`)
-              // console.log("Eviction for demolition");
-            }
-            else if (propertyData[i].properties.development === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: development`)
-              // console.log("Eviction for development");
-            }
-            else if (propertyData[i].properties.ellis_act_withdrawal === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: ellis_act_withdrawal`)
-              // console.log("Eviction for ellis_act_withdrawal");
-            }
-            else if (propertyData[i].properties.failure_to_sign_renewal === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: failure_to_sign_renewal`)
-              // console.log("Eviction for failure_to_sign_renewal");
-            }
-            else if (propertyData[i].properties.good_samaritan_ends === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: good_samaritan_ends`)
-              // console.log("Eviction for good_samaritan_ends");
-            }
-            else if (propertyData[i].properties.illegal_use === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: illegal_use`)
-              // console.log("Eviction for illegal_use");
-            }
-            else if (propertyData[i].properties.late_payments === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: late_payments`)
-              // console.log("Eviction for late_payments");
-            }
-            else if (propertyData[i].properties.lead_remediation === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: lead_remediation`)
-              // console.log("Eviction for lead_remediation");
-            }
-            else if (propertyData[i].properties.non_payment === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: non_payment`)
-              // console.log("Eviction for non_payment");
-            }
-            else if (propertyData[i].properties.nuisance === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: nuisance`)
-              // console.log("Eviction for nuisance");
-            }
-            else if (propertyData[i].properties.other_cause === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: other_cause`)
-              // console.log("Eviction for other_cause");
-            }
-            else if (propertyData[i].properties.owner_move_in === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: owner_move_in`)
-              // console.log("Eviction for owner_move_in");
-            }
-            else if (propertyData[i].properties.roommate_same_unit === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: roommate_same_unit`)
-              // console.log("Eviction for roommate_same_unit");
-            }
-            else if (propertyData[i].properties.substantial_rehab === true) {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: substantial_rehab`)
-              // console.log("Eviction for substantial_rehab");
-            }
-            else {
-                evictionNeighborhood.push(`${propertyData[i].properties.neighborhood}: unapproved_subtenant`)
-              // console.log("Eviction for unapproved_subtenant");
+  //dictionary to hold all wanted data 
+    neighborhoodEvictionRationale = {}
+    //for the length of legendData.features, add neighborhood names to the list
+    for(var i=0;i<legendData.features.length;i++) {
+      neighborhoodEvictionRationale[legendData.features[i].properties.neighborhood] = {}
+    }
+      //looping through each neighborhood name in neighborhoodEvictionRationale for all data below
+      for (const neighborhoodName in neighborhoodEvictionRationale) {
+      //creating dictionary to hold inner arrays
+      neighborhoodEvictionCauseDict = {}
+      // neighborhoodEvictionCauseDict = {"breach":10, "nuisance": 2}
+        // looping though legendData.features.length...
+        for(var i=0; i<legendData.features.length; i++) {
+          //if the neighborhood name is NOT undefined AND matched the name we are looking at, continue
+          if(legendData.features[i].properties.neighborhood != undefined && legendData.features[i].properties.neighborhood == neighborhoodName) {
+            //looping through each individual item in the properties section..
+            for (const propertieskey in legendData.features[i].properties) {
+              //pushing the current properties section value inth the is_eviction_cause function..
+              if(is_eviction_cause(propertieskey)) {
+                //if the current propertieskey returns from the is_eviction_cause function with TRUE..
+                if((legendData.features[i].properties[propertieskey] == true)) {
+                  //if it returns true and also isn't already in the dictionary..
+                  if(neighborhoodEvictionCauseDict[propertieskey] == undefined) {
+                    //add it to the dictionary and set its initial value to 1
+                    neighborhoodEvictionCauseDict[propertieskey] = 1
+                  } else {
+                   //if it IS in the dictionary already, add 1 to the counter
+                    neighborhoodEvictionCauseDict[propertieskey]++
+                  }
+                }
+              }
             }
           }
-        // console.log(evictionNeighborhood)
-    }
-    
-    ///condense list to just neighborhood, rational, and count
-    var a = evictionNeighborhood;
-    var condensedEvictionNeighborhood = { };
-    for(var i = 0; i < a.length; ++i) {
-        if(!condensedEvictionNeighborhood[a[i]])
-        condensedEvictionNeighborhood[a[i]] = 0;
-        ++condensedEvictionNeighborhood[a[i]];
-    }
-    console.log(condensedEvictionNeighborhood)
+        }
+        //push the eviction counters for each completed neighborhood to the overall dictionary
+        neighborhoodEvictionRationale[neighborhoodName] = neighborhoodEvictionCauseDict
+      }
+      //print the beezy and hope everything is accurate and spelled correctly
+  console.log(neighborhoodEvictionRationale)
 
 
+});// end of d3
 
 
+function is_eviction_cause(key) {
+  //list of all possible eviction reasons, the function returns true if the current legendData.features[i].properties matches something in this list. Used to exclude extra information such as "eviction id", "zip code", etc
+  if(["breach", "capital_improvement", "condo_conversion", "demolition", "development", "ellis_act_withdrawal", "failure_to_sign_renewal", "good_samaritan_ends", "illegal_use", "late_payments", "lead_remediation", "non_payment", "nuisance", "other_cause", "owner_move_in", "roommate_same_unit", "substantial_rehab", "unapproved_subtenant"].includes(key)) {
+    return true
+  }
+  //if the properties isn't in the above list, return false so we can skip to the next one
+  return false
+}
 
-});
+
 
