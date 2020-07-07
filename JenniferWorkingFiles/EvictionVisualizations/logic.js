@@ -1,3 +1,4 @@
+/////////EVICTION VISUALIZATIONS
 var queryUrl = "https://data.sfgov.org/resource/5cei-gny5.geojson";
 
 // Perform a GET request to the query URL
@@ -43,7 +44,29 @@ d3.json(queryUrl, function(legendData) {
   console.log(neighborhoodEvictionRationale)
 
 
+//////dropdown BEGIN  
+
+      ///Populates the dropdown with the neighborhood names
+      var select = document.getElementById("neighborhood-select");
+      for(key in neighborhoodEvictionRationale) {
+        // console.log(key)
+        select.options[select.options.length] = new Option(key);
+      }
+
+//////dropdown END
+
+
+
+
 });// end of d3
+
+//where we can begin to use the item selected in the dropdown
+function optionChanged(){
+  var e = document.getElementById("neighborhood-select");
+  var result = e.options[e.selectedIndex].text;
+  console.log(result) 
+}
+
 
 
 function is_eviction_cause(key) {
@@ -57,3 +80,9 @@ function is_eviction_cause(key) {
 
 
 
+
+
+
+
+
+/////////END EVICTION VISUALIZATIONS
