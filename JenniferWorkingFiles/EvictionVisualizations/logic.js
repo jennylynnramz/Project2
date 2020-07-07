@@ -31,12 +31,13 @@ d3.json(queryUrl, function(legendData) {
                   } else {
                    //if it IS in the dictionary already, add 1 to the counter
                     neighborhoodEvictionCauseDict[propertieskey]++
-                  }
-                }
-              }
-            }
-          }
-        }
+                  } //else
+                } //if
+              } //if
+            } //for
+          } //if
+        } //for
+      
         //push the eviction counters for each completed neighborhood to the overall dictionary
         neighborhoodEvictionRationale[neighborhoodName] = neighborhoodEvictionCauseDict
       }
@@ -44,7 +45,15 @@ d3.json(queryUrl, function(legendData) {
   console.log(neighborhoodEvictionRationale)
 
 
-//////dropdown BEGIN  
+      ///dropping null values
+      
+
+
+      //end dropping null values
+
+
+
+  //////dropdown BEGIN  
 
       ///Populates the dropdown with the neighborhood names
       var select = document.getElementById("neighborhood-select");
@@ -53,22 +62,16 @@ d3.json(queryUrl, function(legendData) {
         select.options[select.options.length] = new Option(key);
       }
 
-//////dropdown END
+  //////dropdown END
+
+  // console.log(neighborhoodEvictionRationale)
 
 
 
 
 });// end of d3
 
-//where we can begin to use the item selected in the dropdown
-function optionChanged(){
-  var e = document.getElementById("neighborhood-select");
-  var result = e.options[e.selectedIndex].text;
-  console.log(result) 
-}
-
-
-
+////is_eviction_cause is related to filtering the data
 function is_eviction_cause(key) {
   //list of all possible eviction reasons, the function returns true if the current legendData.features[i].properties matches something in this list. Used to exclude extra information such as "eviction id", "zip code", etc
   if(["breach", "capital_improvement", "condo_conversion", "demolition", "development", "ellis_act_withdrawal", "failure_to_sign_renewal", "good_samaritan_ends", "illegal_use", "late_payments", "lead_remediation", "non_payment", "nuisance", "other_cause", "owner_move_in", "roommate_same_unit", "substantial_rehab", "unapproved_subtenant"].includes(key)) {
@@ -76,8 +79,79 @@ function is_eviction_cause(key) {
   }
   //if the properties isn't in the above list, return false so we can skip to the next one
   return false
-}
+} //end is_eviction_cause
 
+
+//where we grab to use the item selected in the dropdown
+function optionChanged(){
+  var e = document.getElementById("neighborhood-select");
+  var result = e.options[e.selectedIndex].text;
+  // console.log(result)
+  
+  var resultEvictionCounts = Object.values(neighborhoodEvictionRationale[result])
+  // console.log(resultEvictionCounts)
+
+  var resultEvictionLabels = Object.keys(neighborhoodEvictionRationale[result]);
+  // console.log(resultEvictionLabels)
+
+  //removing _ from labels so they look nicer
+  var cleanEvictionLabels = []
+  for (u = 0; u < resultEvictionLabels.length; u++) {
+    // resultEvictionLabels[u].replace(/_/g, ' ');
+    cleanEvictionLabels.push(resultEvictionLabels[u].replace(/_/g, ' '))
+  }
+
+  // console.log(cleanEvictionLabels)
+
+  var totalEvictionNeighborhood = 0
+  console.log(resultEvictionCounts.length)
+  for (i = 0; i < resultEvictionCounts.length; i++) {
+    totalEvictionNeighborhood += resultEvictionCounts[i]
+  }
+  // console.log(totalEvictionNeighborhood)
+
+
+  console.log("Total evictions in " + result + ": " + totalEvictionNeighborhood)
+
+
+
+/////begin plotly/////
+  ////pie
+  var data = [{
+    values: resultEvictionCounts,
+    labels: cleanEvictionLabels,
+    hole: .5,
+    type: 'pie'
+  }];
+  
+  var layout = {
+    title: 'Evictions by reason in ' + result,
+    height: 400,
+    width: 500,
+    annotations: [
+      {
+        font: {
+          size: 20
+        },
+        showarrow: false,
+        text: "total:<br>" + totalEvictionNeighborhood,
+        x: 0.5,
+        y: 0.5
+      }],
+  };
+  
+  Plotly.newPlot('pie', data, layout);
+
+
+
+
+  ///end pie
+
+
+
+///end plotly////
+
+} //end optionChanged
 
 
 
