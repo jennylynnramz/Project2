@@ -1,0 +1,56 @@
+DROP TABLE IF EXISTS real_estate;
+
+CREATE TABLE real_estate (
+    id int NOT NULL,
+    property_type VARCHAR,
+    address VARCHAR,
+ 	city VARCHAR,
+ 	state VARCHAR,
+ 	zip VARCHAR,
+ 	price INT,
+ 	beds FLOAT,
+ 	baths FLOAT,
+ 	neighborhood VARCHAR,
+ 	sqfoot FLOAT,
+ 	price_sqfoot FLOAT,
+ 	hoa_month FLOAT,
+ 	latitude double precision,
+ 	longitude double precision,
+ 	built_year VARCHAR(4),
+	coordinates VARCHAR,
+	PRIMARY KEY (ID)
+);
+
+CREATE TABLE evictions (
+    id int NOT NULL,
+    eviction_id VARCHAR,
+    address VARCHAR,
+ 	city TEXT,
+ 	state TEXT,
+ 	zip TEXT,
+    	file_date DATE,
+ 	non_payment BOOLEAN,
+ 	breach BOOLEAN,
+    nuisance BOOLEAN,
+    illegal_use BOOLEAN,
+    failure_to_sign_renewal BOOLEAN,
+    access_denial BOOLEAN,
+    unapproved_subtenant BOOLEAN,
+    owner_move_in BOOLEAN,
+    demolition BOOLEAN,
+    capital_improvement BOOLEAN,
+    substantial_rehab BOOLEAN,
+    ellis_act_withdrawal BOOLEAN,
+    condo_conversion BOOLEAN,
+    roommate_same_unit BOOLEAN,
+    other_cause BOOLEAN,
+    late_payments BOOLEAN,
+    lead_remediation BOOLEAN,
+    development BOOLEAN,	
+    good_samaritan_ends BOOLEAN,	
+    neighborhood VARCHAR,
+    longitud double precision,
+    latitude double precision,
+	PRIMARY KEY (id)
+);
+
