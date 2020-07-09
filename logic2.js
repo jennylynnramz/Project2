@@ -4,6 +4,7 @@ var evictionUrl = "https://data.sfgov.org/resource/5cei-gny5.geojson";
 var neighborhoodsData = "Resources/SF Find Neighborhoods.geojson";
 
 function createEvictions(SFevictionData) {
+  console.log(SFevictionData);
 
   // Define a function we want to run once for each feature in the features array
   // Give each feature a popup describing the place and time of the eviction
