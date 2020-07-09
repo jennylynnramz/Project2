@@ -6,11 +6,7 @@ body {
 #map,
 body,
 html {
-  height: 95%;
-}
-
-#pie {
-  width: 1000px ;
+  height: 100%;
 }
 
 .legend {
@@ -23,11 +19,4 @@ html {
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-}
-
-footer {
-  background-color: lightblue;
-  padding: 20px;
-  /* margin: 20px; */
-  /* margin: 20px; */
 }
