@@ -1,4 +1,5 @@
-// Fetch data
+console.log("logic2.js is locked and loaded");
+//  Fetch data
 var evictionUrl = "https://data.sfgov.org/resource/5cei-gny5.geojson";
 var neighborhoodsData = "Resources/SF Find Neighborhoods.geojson";
 
