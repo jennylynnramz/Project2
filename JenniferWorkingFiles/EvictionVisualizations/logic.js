@@ -96,6 +96,7 @@ d3.json(queryUrl, function(legendData) {
   } //for
   console.log(evictionByRationale)
 
+
   //////neighborhood dropdown BEGIN  
       ///Populates the dropdown with the neighborhood names
       var select = document.getElementById("eviction-select");
@@ -103,7 +104,7 @@ d3.json(queryUrl, function(legendData) {
         // console.log(key)
         select.options[select.options.length] = new Option(key.replace(/_/g, ' '));
       }
-    //////neighborhood dropdown END
+  //////neighborhood dropdown END
 
 
 
