@@ -31,7 +31,7 @@
   <!-- Jumbotron/Intro -->
   <div class="jumbotron">
     <img src="images/chris-lawton-tX6BrZCFYOQ-unsplash.jpg" class="img-fluid" alt="Responsive image">
-    <h2 class="display-4">Looking at Evictions in San Francisco by Neighborhood</h2>
+    <h2 class="display-4">Looking at Evictions in San Francisco</h2>
     <p class="lead">This group project took the dataset from Data SF to study the relationship between evictions and SF neighborhhods. Additionally, we took data from Redfin's website to look at the relationship, if any, in home prices.</p>
     <hr class="my-4">
     <!-- <p>This website will share with you our learnings and any relevant data visualizations.</p> -->
@@ -57,7 +57,8 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <h3>SF Eviction Summary Statistics</h3>
+        <h3>SF Eviction Pie Chart</h3>
+        <p>Select a Neighborhood to see the distribution of eviction reasons for all the evictions in the neighborhood. Of note are the Lakeshore and Mission neighborhoods, with 180 and 107 evictions respectively in the last year. And Japantown and Seacliff are on the other end of the spectrum with 1 eviction each.</p>
       </div>
     </div>
     <div class="row">
@@ -65,7 +66,7 @@
         <h5>Neighborhood Name:</h5>
           <select id="neighborhood-select" value="Mission" onchange="optionNeighborhoodChanged(this.value)"></select>
       </div>
-      <div id="pie"></div> 
+      <div id="pie"></div>
     </div>
   </div>
 <hr>
@@ -73,7 +74,8 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm">
-        <h3>SF Real Estate Summary Statistics</h3>
+        <h3>Bar chart of eviction reasons/rational by neighborhood.</h3>
+        <p>Select a reason for eviction and see how often it was claimed as part of the eviction filing by neighborhood.</p>
       </div>
     </div>
     <div class="row">
@@ -92,6 +94,7 @@
     <div class="row">
       <div class="col-sm">
         <h3>Interactive Map of Evictions in San Francisco</h3>
+        <p>Here you can play around with seeing the evictions as they are by neighborhood in San Francisco.</p>
       </div>
     </div>
   </div>
@@ -131,7 +134,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm">
-          <h5>Put together with the brains of Cynthia, Humberto, Jennifer, and Stephanie in July of 2020.</h5>
+          <p>Put together with the brains of Cynthia, Humberto, Jennifer, and Stephanie in July of 2020. With the help of the UC Berkeley Extension Program.</p>
         </div>
       </div>
       

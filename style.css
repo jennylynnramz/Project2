@@ -9,6 +9,10 @@ html {
   height: 95%;
 }
 
+#pie {
+  width: 1000px ;
+}
+
 .legend {
   padding: 10px;
   font-family: Sanchez, serif;
@@ -23,7 +27,7 @@ html {
 
 footer {
   background-color: lightblue;
-  padding-top: 10px;
-  margin-top: 10px;
+  padding: 20px;
+  /* margin: 20px; */
   /* margin: 20px; */
 }
