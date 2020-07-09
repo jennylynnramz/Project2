@@ -4,19 +4,32 @@ var queryUrl = "https://data.sfgov.org/resource/5cei-gny5.geojson";
 // Perform a GET request to the query URL
 d3.json(queryUrl, function(data) {
     console.log(data);
+    
   // Once we get a response, send the data.features object to the createFeatures function
   createFeatures(data.features);
+  
 });
 
 function createFeatures(SFevictionData) {
+
+  var dateArray = [];
+  // console.log(dateArray);
 
   // Define a function we want to run once for each feature in the features array
   // Give each feature a popup describing the place and time of the eviction
   function onEachFeature(feature, layer) {
     layer.bindPopup("<h3> Eviction ID: " + feature.properties.eviction_id +
       "</h3><hr><p> SF Neighborhood: " + feature.properties.neighborhood + "</p>" + "<hr><p>Date of Notice: " + new Date(feature.properties.file_date) + "</p>");
+      var date = feature.properties.file_date;
+      // console.log(date);
+      dateArray.push(date);
   }
-
+  console.log(dateArray);
+  var maxDate=dateArray.sort();
+  console.log(maxDate);
+  console.log(maxDate);
+  // var minDate=new Date(Math.min.apply(null,dateArray));
+  // console.log(minDate);
   // Create a GeoJSON layer containing the features array on the SF evictions object
   // Run the onEachFeature function once for each piece of data in the array
   var evictions = L.geoJSON(SFevictionData, {
@@ -25,7 +38,9 @@ function createFeatures(SFevictionData) {
 
   // Sending our evictions layer to the createMap function
   createMap(evictions);
+  
 }
+
 
 function createMap(evictions) {
 
@@ -74,17 +89,17 @@ function createMap(evictions) {
   }).addTo(myMap);
 }
 
-L.choropleth(geojsonData, {
-	valueProperty: 'eviction_id', // which property in the features to use
-	scale: ['white', 'red'], // chroma.js scale - include as many as you like
-	steps: 5, // number of breaks or steps in range
-	mode: 'q', // q for quantile, e for equidistant, k for k-means
-	style: {
-		color: '#fff', // border color
-		weight: 2,
-		fillOpacity: 0.8
-	},
-	onEachFeature: function(feature, layer) {
-		layer.bindPopup(feature.properties.value)
-	}
-}).addTo(map)
+// L.choropleth(geojsonData, {
+// 	valueProperty: 'eviction_id', // which property in the features to use
+// 	scale: ['white', 'red'], // chroma.js scale - include as many as you like
+// 	steps: 5, // number of breaks or steps in range
+// 	mode: 'q', // q for quantile, e for equidistant, k for k-means
+// 	style: {
+// 		color: '#fff', // border color
+// 		weight: 2,
+// 		fillOpacity: 0.8
+// 	},
+// 	onEachFeature: function(feature, layer) {
+// 		layer.bindPopup(feature.properties.value)
+// 	}
+// }).addTo(map)
