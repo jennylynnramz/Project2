@@ -122,10 +122,6 @@ function analyze(error, evictionsResponse, neighborhoodResponse) {
 };  
 
 
-
-
-  
-
  //close of createMap function
 
 
