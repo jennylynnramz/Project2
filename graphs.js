@@ -43,7 +43,12 @@ d3.json(queryUrl, function(legendData) {
         neighborhoodEvictionRationale[neighborhoodName] = neighborhoodEvictionCauseDict
       }
       //print the beezy and hope everything is accurate and spelled correctly
-    // console.log(neighborhoodEvictionRationale)
+    console.log(neighborhoodEvictionRationale)
+
+////////
+///////
+////////
+
 
       //dictionary to hold all wanted data 
   evictionByRationale = {}
@@ -58,35 +63,42 @@ d3.json(queryUrl, function(legendData) {
           } //if       
       } //for
   } //for
+  // console.log("moo")
+  // console.log(evictionByRationale)
  
   for (const listKey in evictionByRationale) {
     for (i=0; i < legendData.features.length; i++) {
     evictionByRationale[listKey][legendData.features[i].properties.neighborhood] = 0
-  }
+    } //for
+  } //for
+
+//////////////////////////////////////////
 
   // console.log(evictionByRationale)
-  
   for (i=0; i < legendData.features.length; i++) {
+    var jsonNeighborhood = legendData.features[i].properties.neighborhood
+
     for (const listkey in evictionByRationale) {
 
       // console.log(listkey) //prints the eviction rationl from the new list
       for (const jsonkey in legendData.features[i].properties) {
+
         // console.log(jsonkey) //prints all of the properties of the original data
         if (is_eviction_cause(jsonkey)) {
-          if((legendData.features[i].properties[jsonkey] === true)) {
+          if((legendData.features[i].properties[jsonkey] == true)) {
           // console.log(jsonkey) //prints the eviction rational from the original data that matches the control list.
             if (jsonkey === listkey) {
-              for (const neighKey in evictionByRationale[listKey]){
-                var jsonNeighborhood = legendData.features[i].properties.neighborhood
-                // console.log("json neighborhood: " + jsonNeighborhood)
+              console.log("eviction rational: " + jsonkey + " " + listkey + i)
+              for (const neighKey in evictionByRationale[listkey]){
+                // console.log("json neighborhood: " + jsonNeighborhood + i)
                 if (neighKey === jsonNeighborhood && jsonkey === listkey) {
                   // console.log("eviction rational: " + jsonkey + " " + listkey)
                   // console.log("Neighborhood: " + neighKey + " " + jsonNeighborhood)
                   evictionByRationale[listkey][neighKey]++
                 } //if
-                else {
-                  continue
-                } //else
+                // else {
+                //   continue
+                // } //else
               } //for
             } //if
           } //if
@@ -94,8 +106,10 @@ d3.json(queryUrl, function(legendData) {
       } //for
     } //for
   } //for
-  } //for
+
+  console.log("quack")
   console.log(evictionByRationale)
+
 
   //////neighborhood dropdown BEGIN  
       ///Populates the dropdown with the neighborhood names
@@ -104,7 +118,7 @@ d3.json(queryUrl, function(legendData) {
         // console.log(key)
         select.options[select.options.length] = new Option(key.replace(/_/g, ' '));
       }
-    //////neighborhood dropdown END
+  //////neighborhood dropdown END
 
 
 
@@ -142,6 +156,7 @@ function optionNeighborhoodChanged(){
   
   var resultEvictionCounts = Object.values(neighborhoodEvictionRationale[result])
   // console.log(resultEvictionCounts)
+  
 
   var resultEvictionLabels = Object.keys(neighborhoodEvictionRationale[result]);
   // console.log(resultEvictionLabels)
