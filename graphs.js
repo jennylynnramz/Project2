@@ -43,7 +43,7 @@ d3.json(queryUrl, function(legendData) {
         neighborhoodEvictionRationale[neighborhoodName] = neighborhoodEvictionCauseDict
       }
       //print the beezy and hope everything is accurate and spelled correctly
-    console.log(neighborhoodEvictionRationale)
+    // console.log(neighborhoodEvictionRationale)
 
 ////////
 ///////
@@ -88,7 +88,7 @@ d3.json(queryUrl, function(legendData) {
           if((legendData.features[i].properties[jsonkey] == true)) {
           // console.log(jsonkey) //prints the eviction rational from the original data that matches the control list.
             if (jsonkey === listkey) {
-              console.log("eviction rational: " + jsonkey + " " + listkey + i)
+              // console.log("eviction rational: " + jsonkey + " " + listkey + i)
               for (const neighKey in evictionByRationale[listkey]){
                 // console.log("json neighborhood: " + jsonNeighborhood + i)
                 if (neighKey === jsonNeighborhood && jsonkey === listkey) {
@@ -107,8 +107,8 @@ d3.json(queryUrl, function(legendData) {
     } //for
   } //for
 
-  console.log("quack")
-  console.log(evictionByRationale)
+  // console.log("quack")
+  // console.log(evictionByRationale)
 
 
   //////neighborhood dropdown BEGIN  
@@ -214,16 +214,16 @@ function optionNeighborhoodChanged(){
 function optionEvictionChanged(){
   var e = document.getElementById("eviction-select");
   var result = (e.options[e.selectedIndex].text).replace(/ /g, '_');
-  console.log(result)
+  // console.log(result)
   
   var resultNeighborhoodCounts = Object.values(evictionByRationale[result])
-  console.log(resultNeighborhoodCounts)
+  // console.log(resultNeighborhoodCounts)
 
   var resultNeighborhoodLabels = Object.keys(evictionByRationale[result]);
-  console.log(resultNeighborhoodLabels)
+  // console.log(resultNeighborhoodLabels)
 
   var resultByNeighborhoodEvictionLabels = Object.keys(evictionByRationale)
-  console.log(resultByNeighborhoodEvictionLabels)
+  // console.log(resultByNeighborhoodEvictionLabels)
 
   // removing _ from labels so they look nicer
   var cleanByNeighborhoodEvictionLabels = []
@@ -232,14 +232,14 @@ function optionEvictionChanged(){
     cleanByNeighborhoodEvictionLabels.push(resultByNeighborhoodEvictionLabels[u].replace(/_/g, ' '))
   }
 
-  console.log(cleanByNeighborhoodEvictionLabels)
+  // console.log(cleanByNeighborhoodEvictionLabels)
 
   var totalNeighborhoodEviction = 0
   // console.log(resultEvictionCounts.length)
   for (i = 0; i < resultNeighborhoodCounts.length; i++) {
     totalNeighborhoodEviction += resultNeighborhoodCounts[i]
   }
-  console.log("Total Evictions for " + result + ":" + totalNeighborhoodEviction)
+  // console.log("Total Evictions for " + result + ":" + totalNeighborhoodEviction)
 
   ///begin plotly by EVICTION REASON ////
 
@@ -252,7 +252,9 @@ function optionEvictionChanged(){
   ];
 
   var layout = {
-    title: ('Evictions for ' + result.replace(/_/g, ' ')).toUpperCase(),
+    title: ('Evictions for ' + result.replace(/_/g, ' ')).toUpperCase() + "<br>Total Evictions: " + totalNeighborhoodEviction,
+    height: 600,
+    width: 1100,
     subtitle: 'Total Evictions: ' + totalNeighborhoodEviction
   };
   
