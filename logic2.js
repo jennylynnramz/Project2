@@ -9,10 +9,26 @@ function createEvictions(SFevictionData) {
   // Define a function we want to run once for each feature in the features array
   // Give each feature a popup describing the place and time of the eviction
   function onEachFeature(feature, layer) {
-    layer.bindPopup("<h3> Eviction ID: " + feature.properties.eviction_id +
-      "</h3><hr><p> SF Neighborhood: " + feature.properties.neighborhood + "</p>" + "<hr><p>Date of Notice: " + new Date(feature.properties.file_date) + "</p>");
-  }
 
+    for (const prop in feature.properties) {
+      // console.log("prop: " + prop)
+      if (is_eviction_cause(prop)) {
+        // console.log("True prop: " + prop)
+        if (feature.properties[prop] === true) {
+          // console.log("Double True: " + feature.properties[prop])
+          var popupEviction = prop
+        } //for const
+      } //if is eviction
+    } //if feature_true
+    // console.log(popupEviction)
+    
+
+    layer.bindPopup("<h3> Eviction ID: " + feature.properties.eviction_id +
+      "</h3><hr><p> Neighborhood: " + feature.properties.neighborhood + 
+      "<p> Eviction Reason: " + popupEviction + "</p>"  + 
+      "<p>Date of Notice: " + new Date(feature.properties.file_date).toDateString() + "</p>");
+  
+  }
   // Create a GeoJSON layer containing the features array on the SF evictions object
   // Run the onEachFeature function once for each piece of data in the array
   var evictions = L.geoJSON(SFevictionData, {
@@ -144,8 +160,9 @@ function createLegend(myMap) {
 
 
   //where the count begins
-  d3.json(evictionUrl, function(legendData) {
-  //   console.log(legendData);
+  d3.json("https://data.sfgov.org/resource/5cei-gny5.geojson", function(legendData) {
+    console.log("Is this working:")
+    console.log(legendData);
 
     var propertyData = legendData.features
 
@@ -268,7 +285,7 @@ function createLegend(myMap) {
 
     
     } //end neighborhood for loop
-    // console.log(neighborhoodList)
+    console.log(neighborhoodList)
 
     var distinctList = [...new Set(neighborhoodList)]
 
@@ -303,3 +320,17 @@ function createLegend(myMap) {
     ].join("");
   };
 };
+
+
+////is_eviction_cause is related to filtering the data
+function is_eviction_cause(prop) {
+  //list of all possible eviction reasons, the function returns true if the current legendData.features[i].properties matches something in this list. Used to exclude extra information such as "eviction id", "zip code", etc
+  if(["breach", "capital_improvement", "condo_conversion", "demolition", "development", "ellis_act_withdrawal", 
+  "failure_to_sign_renewal", "good_samaritan_ends", "illegal_use", "late_payments", "lead_remediation",
+   "non_payment", "nuisance", "other_cause", "owner_move_in", "roommate_same_unit", "substantial_rehab", 
+   "unapproved_subtenant"].includes(prop)) {
+    return true
+  }
+  //if the properties isn't in the above list, return false so we can skip to the next one
+  return false
+}
