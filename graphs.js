@@ -254,7 +254,7 @@ function optionEvictionChanged(){
   var layout = {
     title: ('Evictions for ' + result.replace(/_/g, ' ')).toUpperCase() + "<br>Total Evictions: " + totalNeighborhoodEviction,
     height: 600,
-    width: 1100,
+    width: 1000,
     subtitle: 'Total Evictions: ' + totalNeighborhoodEviction
   };
   

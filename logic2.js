@@ -13,14 +13,14 @@ function createEvictions(SFevictionData) {
     for (const prop in feature.properties) {
       // console.log("prop: " + prop)
       if (is_eviction_cause(prop)) {
-        console.log("True prop: " + prop)
+        // console.log("True prop: " + prop)
         if (feature.properties[prop] === true) {
-          console.log("Double True: " + feature.properties[prop])
+          // console.log("Double True: " + feature.properties[prop])
           var popupEviction = prop
         } //for const
       } //if is eviction
     } //if feature_true
-    console.log(popupEviction)
+    // console.log(popupEviction)
     
 
     layer.bindPopup("<h3> Eviction ID: " + feature.properties.eviction_id +
@@ -160,8 +160,9 @@ function createLegend(myMap) {
 
 
   //where the count begins
-  d3.json(evictionUrl, function(legendData) {
-  //   console.log(legendData);
+  d3.json("https://data.sfgov.org/resource/5cei-gny5.geojson", function(legendData) {
+    console.log("Is this working:")
+    console.log(legendData);
 
     var propertyData = legendData.features
 
@@ -284,7 +285,7 @@ function createLegend(myMap) {
 
     
     } //end neighborhood for loop
-    // console.log(neighborhoodList)
+    console.log(neighborhoodList)
 
     var distinctList = [...new Set(neighborhoodList)]
 

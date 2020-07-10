@@ -8,6 +8,16 @@ body,
 html {
   height: 95%;
 }
+#map {
+padding-right: 10%;
+padding-left: 10%;
+  
+}
+
+.nav {
+  position: fixed;
+ 
+}
 
 #pie {
   width: 1000px ;
@@ -15,7 +25,7 @@ html {
 
 .legend {
   padding: 10px;
-  font-family: Sanchez, serif;
+  font-family: serif;
   font-size: 12px;
   font-weight: bold;
   line-height: 14px;
