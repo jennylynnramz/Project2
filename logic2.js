@@ -4,7 +4,7 @@ var evictionUrl = "https://data.sfgov.org/resource/5cei-gny5.geojson";
 var neighborhoodsData = "Resources/SF Find Neighborhoods.geojson";
 
 function createEvictions(SFevictionData) {
-  console.log(SFevictionData);
+  // console.log(SFevictionData);
 
   // Define a function we want to run once for each feature in the features array
   // Give each feature a popup describing the place and time of the eviction
@@ -124,7 +124,12 @@ function createMap(evictions, neighborhoods) {
     collapsed: false
   }).addTo(myMap);
   createLegend(myMap);
+  console.log("have we gotten this far?")
 };
+//////////
+
+
+///////////
 
 // Use d3.queue to wait for both JSON files to load
 d3.queue()
@@ -149,18 +154,25 @@ function createLegend(myMap) {
   var info = L.control({
     position: "bottomleft"
   });
+  console.log("inside function")
 
     //create map placement in hmtl
   info.onAdd = function() {
     var div = L.DomUtil.create("div", "legend");
     return div;
   };
+  console.log("inside function two")
+
   // Add the info legend to the map
   info.addTo(myMap);
-
-
+ console.log("inside function three")
+  
+}
+var magicUrl = "https://data.sfgov.org/resource/5cei-gny5.geojson";
+console.log("inside four")
+console.log(magicUrl)
   //where the count begins
-  d3.json("https://data.sfgov.org/resource/5cei-gny5.geojson", function(legendData) {
+d3.json(magicUrl, function(legendData) {
     console.log("Is this working:")
     console.log(legendData);
 
@@ -319,7 +331,7 @@ function createLegend(myMap) {
       
     ].join("");
   };
-};
+;
 
 
 ////is_eviction_cause is related to filtering the data
@@ -334,3 +346,7 @@ function is_eviction_cause(prop) {
   //if the properties isn't in the above list, return false so we can skip to the next one
   return false
 }
+
+
+
+console.log("end")
