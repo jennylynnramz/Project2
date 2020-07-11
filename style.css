@@ -6,25 +6,24 @@ body {
 #map,
 body,
 html {
-  height: 95%;
+  height: 100%;
 }
-#map {
-padding-right: 10%;
-padding-left: 10%;
+/* #map {
+padding: 5%;
   
-}
+} */
 
-.nav {
+/* .nav {
   position: fixed;
  
-}
+} */
 
 #pie {
   width: 1000px ;
 }
 
 .legend {
-  padding: 10px;
+  padding: 1.5px;
   font-family: serif;
   font-size: 12px;
   font-weight: bold;
