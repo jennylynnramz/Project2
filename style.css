@@ -1,22 +1,17 @@
-body {
-  padding: 0;
-  margin: 0;
-}
+
 
 #map,
 body,
 html {
   height: 100%;
 }
-/* #map {
-padding: 5%;
-  
-} */
 
-/* .nav {
-  position: fixed;
+
+.nav {
+  padding: 15px;
+  background-color: lightblue;
  
-} */
+}
 
 #pie {
   width: 1000px ;
@@ -32,6 +27,11 @@ padding: 5%;
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.real-estate-container {
+  padding-top: 50px;
+  padding-left: 10px;
 }
 
 footer {
